@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>medweb</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        {% load static %}
+        <style>
+          *{
+              margin:0;
+              padding:5px;
+            }
+            body {
+                font-family: "Open Sans", sans-serif;
+                color: #444444;
+              }
+              
+              a {
+                color: #1977cc;
+                text-decoration: none;
+              }
+              
+              a:hover {
+                color: #3291e6;
+                text-decoration: none;
+              }
+              
+              h1,
+              h2,
+              h3,
+              h4,
+              h5,
+              h6 {
+                font-family: "Raleway", sans-serif;
+              }
+              
+              /*--------------------------------------------------------------
+              # Preloader
+              --------------------------------------------------------------*/
+              #preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 9999;
+                overflow: hidden;
+                background: #fff;
+              }
+              
+              #preloader:before {
+                content: "";
+                position: fixed;
+                top: calc(50% - 30px);
+                left: calc(50% - 30px);
+                border: 6px solid #1977cc;
+                border-top-color: #d1e6f9;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                animation: animate-preloader 1s linear infinite;
+              }
+              
+              @keyframes animate-preloader {
+                0% {
+                  transform: rotate(0deg);
+                }
+              
+                100% {
+                  transform: rotate(360deg);
+                }
+              }
+              
+              /*--------------------------------------------------------------
+              # Back to top button
+              --------------------------------------------------------------*/
+              .back-to-top {
+                position: fixed;
+                visibility: hidden;
+                opacity: 0;
+                right: 15px;
+                bottom: 15px;
+                z-index: 996;
+                background: #1977cc;
+                width: 40px;
+                height: 40px;
+                border-radius: 4px;
+                transition: all 0.4s;
+              }
+              
+              .back-to-top i {
+                font-size: 28px;
+                color: #fff;
+                line-height: 0;
+              }
+              
+              .back-to-top:hover {
+                background: #298ce5;
+                color: #fff;
+              }
+              
+              .back-to-top.active {
+                visibility: visible;
+                opacity: 1;
+              }
+              
+              .datepicker-dropdown {
+                padding: 20px !important;
+              }
+              
+              /*--------------------------------------------------------------
+              # Top Bar
+              --------------------------------------------------------------*/
+              #topbar {
+                background: #fff;
+                height: 40px;
+                font-size: 14px;
+                transition: all 0.5s;
+                z-index: 996;
+              }
+              
+              #topbar.topbar-scrolled {
+                top: -40px;
+              }
+              
+              #topbar .contact-info a {
+                line-height: 1;
+                color: #444444;
+                transition: 0.3s;
+              }
+              
+              #topbar .contact-info a:hover {
+                color: #1977cc;
+              }
+              
+              #topbar .contact-info i {
+                color: #1977cc;
+                padding-right: 4px;
+                margin-left: 15px;
+                line-height: 0;
+              }
+              
+              #topbar .contact-info i:first-child {
+                margin-left: 0;
+              }
+              
+              #topbar .social-links a {
+                color: #437099;
+                padding-left: 15px;
+                display: inline-block;
+                line-height: 1px;
+                transition: 0.3s;
+              }
+              
+              #topbar .social-links a:hover {
+                color: #1977cc;
+              }
+              
+              #topbar .social-links a:first-child {
+                border-left: 0;
+              }
+              #header {
+                background: #fff;
+                transition: all 0.5s;
+                z-index: 997;
+                padding: 15px 0;
+                top: 40px;
+                box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+                justify-content:space-between;
+               
+              }
+              
+              #header.header-scrolled {
+                top: 0;
+              }
+              
+              .logo {
+                font-size: 30px;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                font-weight: 700;
+                left:10px;
+                letter-spacing: 2.5px;
+                font-family: "Poppins", sans-serif;
+                justify-content:space-between;
+              }
+              
+              #header .logo a {
+                color: #2c4964;
+                
+                justify-content:space-between;
+              }
+              
+              #header .logo img {
+                max-height: 40px;
+              }
+              
+             
+              
+              /*--------------------------------------------------------------
+              # Navigation Menu
+              --------------------------------------------------------------*/
+              /**
+              * Desktop Navigation 
+              */
+              .navbar {
+                padding: 0;
+                position:relative;
+                left:100px;
+                justify-content: space-between; 
+              }
+              
+              .navbar ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                list-style: none;
+                align-items: center;
+                justify-content: space-between; 
+              }
+              
+              .navbar li {
+                position: relative;
+              }
+              
+              .navbar>ul>li {
+                position: relative;
+                white-space: nowrap;
+                padding: 8px 0 8px 20px;
+              }
+              
+              .navbar a,
+              .navbar a:focus {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 14px;
+                color: #2c4964;
+                white-space: nowrap;
+                transition: 0.3s;
+                border-bottom: 2px solid #fff;
+                padding: 5px 2px;
+              }
+              
+              .navbar a i,
+              .navbar a:focus i {
+                font-size: 12px;
+                line-height: 0;
+                margin-left: 5px;
+              }
+              
+              .navbar a:hover,
+              .navbar .active,
+              .navbar .active:focus,
+              .navbar li:hover>a {
+                color: #1977cc;
+                border-color: #1977cc;
+              }
+              
+              
+         
+              .mobile-nav-toggle {
+                color: #2c4964;
+                font-size: 28px;
+                cursor: pointer;
+                display: none;
+                line-height: 0;
+                transition: 0.5s;
+              }
+              
+              .mobile-nav-toggle.fa-x {
+                color: #fff;
+              }
+              
+              @media (max-width: 991px) {
+                .mobile-nav-toggle {
+                  display: block;
+                }
+              
+                .navbar ul {
+                  display: block;
+                }
+              }
+              
+              .navbar-mobile {
+                position: fixed;
+                overflow: hidden;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                background: rgba(28, 47, 65, 0.9);
+                transition: 0.3s;
+                z-index: 999;
+              }
+              
+              .navbar-mobile .mobile-nav-toggle {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+              }
+              
+              
+                color: #2c4964;.navbar-mobile ul {
+                display: block;
+                position: absolute;
+                top: 55px;
+                right: 15px;
+                bottom: 15px;
+                left: 15px;
+                padding: 10px 0;
+                background-color: #fff;
+                overflow-y: auto;
+                transition: 0.3s;
+              }
+              
+              .navbar-mobile>ul>li {
+                padding: 0;
+              }
+              
+              .navbar-mobile a,
+              .navbar-mobile a:focus {
+                padding: 10px 20px;
+                font-size: 15px;
+                border: none;
+              }
+              
+              .navbar-mobile a:hover,
+              .navbar-mobile .active,
+              .navbar-mobile li:hover>a {
+                color: #1977cc;
+              }
+              
+              .navbar-mobile .getstarted,
+              .navbar-mobile .getstarted:focus {
+                margin: 15px;
+              }
+              
+              .navbar-mobile .dropdown ul {
+                position: static;
+                display: none;
+                margin: 10px 20px;
+                padding: 10px 0;
+                z-index: 99;
+                opacity: 1;
+                visibility: visible;
+                background: #fff;
+                box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+              }
+              
+              .navbar-mobile .dropdown ul li {
+                min-width: 200px;
+              }
+              
+              .navbar-mobile .dropdown ul a {
+                padding: 10px 20px;
+              }
+              
+              .navbar-mobile .dropdown ul a i {
+                font-size: 12px;
+              }
+               
+              .navbar-mobile .dropdown ul a:hover,
+              .navbar-mobile .dropdown ul .active:hover,
+              .navbar-mobile .dropdown ul li:hover>a {
+                color: #1977cc;
+              }
+                
+              .navbar-mobile .dropdown>.dropdown-active {
+                display: block;
+              } 
+            
+              
+              #hero {
+                width: 100%;
+                height: 90vh;
+                background: url("{% static 'images/health.jpg' %}") top center;
+                background-size: cover;
+                margin-bottom: -200px;
+              }
+              
+              #hero .container {
+                position: relative;
+              }
+              
+              #hero h1 {
+                margin: 0;
+                font-size: 48px;
+                font-weight: 700;
+                line-height: 56px;
+                text-transform: uppercase;
+                color: #2c4964;
+              }
+              
+              #hero h2 {
+                color: #2c4964;
+                margin: 10px 0 0 0;
+                font-size: 24px;
+              }
+              
+              #hero .btn-get-started {
+                font-family: "Raleway", sans-serif;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 14px;
+                letter-spacing: 1px;
+                display: inline-block;
+                padding: 12px 35px;
+                margin-top: 30px;
+                border-radius: 50px;
+                transition: 0.5s;
+                color: #fff;
+                background: #1977cc;
+              }
+              
+              #hero .btn-get-started:hover {
+                background: #3291e6;
+              }
+              
+              @media (min-width: 1024px) {
+                #hero {
+                  background-attachment: fixed;
+                }
+              }
+              
+              @media (max-width: 992px) {
+                #hero {
+                  margin-bottom: 0;
+                  height: 100vh;
+                }
+              
+                #hero .container {
+                  padding-bottom: 63px;
+                }
+              
+                #hero h1 {
+                  font-size: 28px;
+                  line-height: 36px;
+                }
+              
+                #hero h2 {
+                  font-size: 18px;
+                  line-height: 24px;
+                  margin-bottom: 30px;
+                }
+              }
+              
+              @media (max-height: 600px) {
+                #hero {
+                  height: 110vh;
+                }
+              }
+              section {
+                padding: 60px 0;
+                overflow: hidden;
+              }
+              
+              .section-bg {
+                background-color: #f1f7fd;
+              }
+              
+              .section-title {
+                text-align: center;
+                padding-bottom: 30px;
+              }
+              
+              .section-title h2 {
+                font-size: 32px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+                position: relative;
+                color: #2c4964;
+              }
+              
+              .section-title h2::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 120px;
+                height: 1px;
+                background: #ddd;
+                bottom: 1px;
+                left: calc(50% - 60px);
+              }
+              
+              .section-title h2::after {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 40px;
+                height: 3px;
+                background: #1977cc;
+                bottom: 0;
+                left: calc(50% - 20px);
+              }
+              
+              .section-title p {
+                margin-bottom: 0;
+              }
+              
+              /*--------------------------------------------------------------
+              # Breadcrumbs
+              --------------------------------------------------------------*/
+              .breadcrumbs {
+                padding: 20px 0;
+                background-color: #f1f7fd;
+                min-height: 40px;
+                margin-top: 120px;
+              }
+              
+              @media (max-width: 992px) {
+                .breadcrumbs {
+                  margin-top: 100px;
+                }
+              }
+              
+              .breadcrumbs h2 {
+                font-size: 24px;
+                font-weight: 300;
+                margin: 0;
+              }
+              
+              @media (max-width: 992px) {
+                .breadcrumbs h2 {
+                  margin: 0 0 10px 0;
+                }
+              }
+              
+              .breadcrumbs ol {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                font-size: 14px;
+              }
+              
+              .breadcrumbs ol li+li {
+                padding-left: 10px;
+              }
+              
+              .breadcrumbs ol li+li::before {
+                display: inline-block;
+                padding-right: 10px;
+                color: #6c757d;
+                content: "/";
+              }
+              
+              @media (max-width: 768px) {
+                .breadcrumbs .d-flex {
+                  display: block !important;
+                }
+              
+                .breadcrumbs ol {
+                  display: block;
+                }
+              
+                .breadcrumbs ol li {
+                  display: inline-block;
+                }
+              }
+              .about{
+                font-size:20px;
+                margin-top: 280px;
+               
+              }
+              .about .icon-box {
+                margin-top: 40px;
+              }
+              .about .icon-boxes h4 {
+                font-size: 18px;
+                color: #4b7dab;
+                margin-bottom: 15px;
+              }
+              
+              .about .icon-boxes h3 {
+                font-size: 28px;
+                font-weight: 700;
+                color: #2c4964;
+                margin-bottom: 15px;
+              }
+              
+              .about .icon-box {
+                margin-top: 50px;
+              }
+              
+              .about .icon-box .icon {
+                float: left;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 64px;
+                height: 64px;
+                border: 2px solid #8dc2f1;
+                border-radius: 50px;
+                transition: 0.5s;
+              }
+              
+              .about .icon-box .icon i {
+                color: #1977cc;
+                font-size: 32px;
+              }
+              
+              .about .icon-box:hover .icon {
+                background: #1977cc;
+                border-color: #1977cc;
+              }
+              
+              .about .icon-box:hover .icon i {
+                color: #fff;
+              }
+              
+              .about .icon-box .title {
+                margin-left: 85px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                font-size: 18px;
+              }
+              
+              .about .icon-box .title a {
+                color: #343a40;
+                transition: 0.3s;
+              }
+              
+              .about .icon-box .title a:hover {
+                color: #1977cc;
+              }
+              
+              .about .icon-box .description {
+                margin-left: 85px;
+                line-height: 24px;
+                font-size: 14px;
+              }
+              
+              .about .video-box {
+                background: url("{% static 'images/hea.jpg' %}") center center no-repeat;
+                background-size: cover;
+                min-height: 500px;
+              }
+              .departments {
+                overflow: hidden;
+              }
+              
+              .departments .nav-tabs {
+                border: 0;
+                z-index:0;
+              }
+              
+              .departments .nav-link {
+                border: 0;
+                padding: 12px 15px 12px 0;
+                transition: 0.3s;
+                color: #2c4964;
+                border-radius: 0;
+                border-right: 2px solid #ebf1f6;
+                font-weight: 600;
+                font-size: 15px;
+                z-index:0;
+              }
+              
+              .departments .nav-link:hover {
+                color: #1977cc;
+              }
+              
+              .departments .nav-link.active {
+                color: #1977cc;
+                border-color: #1977cc;
+              }
+              
+              .departments .tab-pane.active {
+                animation: fadeIn 0.5s ease-out;
+              }
+              
+              .departments .details h3 {
+                font-size: 26px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                color: #2c4964;
+              }
+              
+              .departments .details p {
+                color: #777777;
+              }
+              
+              {% comment %} .departments .details p:last-child {
+                margin-bottom: 0;
+              } {% endcomment %}
+              
+              @media (max-width: 992px) {
+                .departments .nav-link {
+                  border: 0;
+                  padding: 15px;
+                }
+              
+                .departments .nav-link.active {
+                  color: #fff;
+                  background: #1977cc;
+                }
+              }
+              .doctors {
+                background: #fff;
+              }
+              
+              .doctors .member {
+                position: relative;
+                box-shadow: 0px 2px 15px rgba(44, 73, 100, 0.08);
+                padding: 30px;
+                border-radius: 10px;
+              }
+              
+              .doctors .member .pic {
+                overflow: hidden;
+                width: 180px;
+                border-radius: 50%;
+              }
+              
+              .doctors .member .pic img {
+                transition: ease-in-out 0.3s;
+              }
+              
+              .doctors .member:hover img {
+                transform: scale(1.1);
+              }
+              
+              .doctors .member .member-info {
+                padding-left: 30px;
+              }
+              
+              .doctors .member h4 {
+                font-weight: 700;
+                margin-bottom: 5px;
+                font-size: 20px;
+                color: #2c4964;
+              }
+              
+              .doctors .member span {
+                display: block;
+                font-size: 15px;
+                padding-bottom: 10px;
+                position: relative;
+                font-weight: 500;
+              }
+              
+              .doctors .member span::after {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 50px;
+                height: 1px;
+                background: #b2c8dd;
+                bottom: 0;
+                left: 0;
+              }
+              
+              .doctors .member p {
+                margin: 10px 0 0 0;
+                font-size: 14px;
+              }
+              
+              .doctors .member .social {
+                margin-top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+              }
+              
+              .doctors .member .social a {
+                transition: ease-in-out 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50px;
+                width: 32px;
+                height: 32px;
+                background: #a0bcd5;
+              }
+              
+              .doctors .member .social a i {
+                color: #fff;
+                font-size: 16px;
+                margin: 0 2px;
+              }
+              
+              .doctors .member .social a:hover {
+                background: #1977cc;
+              }
+              
+              .doctors .member .social a+a {
+                margin-left: 8px;
+              }
+              @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
+              @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+         
+              figure.snip1390 {
+                font-family: 'Roboto', Arial, sans-serif;
+                position: relative;
+                overflow: hidden;
+                margin: 10px;
+                min-width: 230px;
+                max-width: 315px;
+                width: 100%;
+                color: #000000;
+                text-align: center;
+                font-size: 16px;
+                background-color: #2C3447;
+                display: inline-block;
+                padding: 30px;
+                background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+              figure.snip1390 *,
+              figure.snip1390 *:before,
+              figure.snip1390 *:after {
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                -webkit-transition: all 0.35s ease;
+                transition: all 0.35s ease;
+              }
+              figure.snip1390 figcaption {
+                width: 100%;
+              }
+              figure.snip1390 h2,
+              figure.snip1390 h4,
+              figure.snip1390 blockquote {
+                margin: 0;
+              }
+              figure.snip1390 h2,
+              figure.snip1390 h4 {
+                font-weight: 300;
+              }
+              figure.snip1390 h2 {
+                color: #ffffff;
+              }
+              figure.snip1390 h4 {
+                color: #a6a6a6;
+              }
+              figure.snip1390 blockquote {
+                font-size: 1em;
+                padding: 45px 20px 40px 50px;
+                margin-top: 30px;
+                background-color: #ffffff;
+                border-radius: 5px;
+                box-shadow: inset -1.4px -1.4px 2px rgba(0, 0, 0, 0.3);
+                text-align: left;
+                position: relative;
+              }
+              figure.snip1390 blockquote:before {
+                font-family: 'FontAwesome';
+                content: "\201C";
+                position: absolute;
+                font-size: 70px;
+                opacity: 0.25;
+                font-style: normal;
+                top: 0px;
+                left: 20px;
+              }
+              figure.snip1390 .profile {
+                width: 100px;
+                border-radius: 50%;
+                display: inline-block;
+                box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
+                margin-bottom: 10px;
+                border: solid 5px #A6A57A;
+              }
+              #footer {
+                color: #444444;
+                font-size: 14px;
+                background: #f1f7fd;
+              }
+              
+              #footer .footer-top {
+                padding: 60px 0 30px 0;
+                background: #fff;
+                box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+              }
+              
+              #footer .footer-top .footer-contact {
+                margin-bottom: 30px;
+              }
+              
+              #footer .footer-top .footer-contact h4 {
+                font-size: 22px;
+                margin: 0 0 30px 0;
+                padding: 2px 0 2px 0;
+                line-height: 1;
+                font-weight: 700;
+              }
+              
+              #footer .footer-top .footer-contact p {
+                font-size: 14px;
+                line-height: 24px;
+                margin-bottom: 0;
+                font-family: "Raleway", sans-serif;
+                color: #777777;
+              }
+              
+              #footer .footer-top h4 {
+                font-size: 16px;
+                font-weight: bold;
+                color: #444444;
+                position: relative;
+                padding-bottom: 12px;
+              }
+              
+              #footer .footer-top .footer-links {
+                margin-bottom: 30px;
+              }
+              
+              #footer .footer-top .footer-links ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+              }
+              
+              #footer .footer-top .footer-links ul i {
+                padding-right: 2px;
+                color: #1c84e3;
+                font-size: 18px;
+                line-height: 1;
+              }
+              
+              #footer .footer-top .footer-links ul li {
+                padding: 10px 0;
+                display: flex;
+                align-items: center;
+              }
+              
+              #footer .footer-top .footer-links ul li:first-child {
+                padding-top: 0;
+              }
+              
+              #footer .footer-top .footer-links ul a {
+                color: #777777;
+                transition: 0.3s;
+                display: inline-block;
+                line-height: 1;
+              }
+              
+              #footer .footer-top .footer-links ul a:hover {
+                text-decoration: none;
+                color: #1977cc;
+              }
+              
+              #footer .footer-newsletter {
+                font-size: 15px;
+              }
+              
+              #footer .footer-newsletter h4 {
+                font-size: 16px;
+                font-weight: bold;
+                color: #444444;
+                position: relative;
+                padding-bottom: 12px;
+              }
+              
+              #footer .footer-newsletter form {
+                margin-top: 30px;
+                background: #fff;
+                padding: 6px 10px;
+                position: relative;
+                border-radius: 50px;
+                text-align: left;
+                border: 1px solid #bfdcf7;
+              }
+              
+              #footer .footer-newsletter form input[type=email] {
+                border: 0;
+                padding: 4px 8px;
+                width: calc(100% - 100px);
+              }
+              
+              #footer .footer-newsletter form input[type=submit] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                border: 0;
+                background: none;
+                font-size: 16px;
+                padding: 0 20px;
+                background: #fff;
+                color: #fff;
+                transition: 0.3s;
+                border-radius: 50px;
+              }
+              
+              #footer .footer-newsletter form input[type=submit]:hover {
+                background: #1c84e3;
+              }
+              
+              #footer .credits {
+                padding-top: 5px;
+                font-size: 13px;
+                color: #444444;
+              }
+              
+              #footer .social-links a {
+                font-size: 18px;
+                display: inline-block;
+                background: #1977cc;
+                color: #fff;
+                line-height: 1;
+                padding: 8px 0;
+                margin-right: 4px;
+                border-radius: 50%;
+                text-align: center;
+                width: 36px;
+                height: 36px;
+                transition: 0.3s;
+              }
+              
+              #footer .social-links a:hover {
+                background: #1c84e3;
+                color: #fff;
+                text-decoration: none;
+              }
+          
+        </style>
+
+    </head>
+    <body >
+
+        <div id="topbar" class="d-flex align-items-center fixed-top">
+            <div class="container d-flex justify-content-between">
+              <div class="contact-info d-flex align-items-center">
+                <i class="fa fa-sharp fa-solid fa-envelope"></i><a href="mailto:contact@example.com">contact@yahoo.com</a>
+                <i class="fa fa-solid fa-phone"></i>8080707060
+              </div>
+              <div class="d-none d-lg-flex social-links align-items-center">
+                <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fa fa-brands fa-facebook"></i></a>
+                <a href="#" class="instagram"><i class="fa fa-brands fa-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="fa fa-brands fa-linkedin"></i></a>
+              </div>
+            </div>
+        </div>
+          <header id="header" class="fixed-top">
+            <div class="container d-flex align-items-center">
+        
+              <h1 class="logo me-auto"><a href="index.html">MEDICITY</a></h1>
+              <nav id="navbar" class="navbar order-last order-lg-0 " >
+                <ul class="menu">
+                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                  <li><a class="nav-link scrollto" href="#about">About</a></li>
+                  <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                  <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
+                  <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+                  <li><a class="nav-link scrollto" href="#appoinment">Appoinment</a></li>
+                  <li><a class="nav-link scrollto" href="#review">Review</a></li>
+                  <li><a class="nav-link scrollto" href="#brochure">Brochure</a></li>
+                  <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
+                </ul>
+                <i class="fa fa-solid fa-bars mobile-nav-toggle"></i>
+              </nav>
+            </div>
+          </header>
+          <section id="hero" class="d-flex align-items-center">
+            <div class="container">
+              <h1>Welcome to MediCity</h1>
+              <h2>A church is a hospital for sinners, not a museum for saints.</h2>
+              <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            </div>
+          </section><!-- End Hero -->
+          <section id="about" class="about">
+            <div class="container-fluid">
+      
+              <div class="row">
+                <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
+                  <img src="{% static 'images/hea.jpg' %}">
+                </div>
+              
+                <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+                  <h3>About Us</h3>
+                  <p>Welcome to MediCity, a leading healthcare institution dedicated to delivering exceptional medical care to our community.
+
+                    At MediCity, our mission is to provide compassionate, comprehensive, and accessible healthcare to all individuals, regardless of their background or circumstances. We are driven by our core values of integrity, innovation, and patient-centered care.
+                    
+                    Founded in 1984, MediCity has been a pillar of healthcare excellence in our community for over 39 year. We have continually evolved to meet the changing needs of our patients and have received numerous accolades for our dedication to clinical excellence and patient satisfaction.</p>
+      
+                  {% comment %} <div class="icon-box">
+                    <div class="icon"><i class="bx bx-fingerprint"></i></div>
+                    <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                  </div>
+      
+                  <div class="icon-box">
+                    <div class="icon"><i class="bx bx-gift"></i></div>
+                    <h4 class="title"><a href="">Nemo Enim</a></h4>
+                    <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                  </div>
+      
+                  <div class="icon-box">
+                    <div class="icon"><i class="bx bx-atom"></i></div>
+                    <h4 class="title"><a href="">Dine Pad</a></h4>
+                    <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
+                  </div> {% endcomment %}
+      
+                </div>
+              </div>
+      
+            </div>
+          </section>
+          <section id="services" class="services">
+            <div class="container">
+      
+              <div class="section-title">
+                <h2>Services</h2>
+                <p>Our mission is to provide compassionate, comprehensive, and accessible healthcare to all individuals, regardless of their background or circumstances. We are driven by our core values of integrity, innovation, and patient-centered care.</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="card" style="width: 18rem;">
+                    <img src="{% static 'images/consultation.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">  
+                      <h5 class="card-title font-weight-bold ">Doctor Consultation</h5>
+                      <p class="card-text">Provides expert doctor opinion based on your symptoms & medical history ,strategize you with a proper treatment plan follow up with atmost care.</p>
+                      <a href="#" class="btn btn-primary">More</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+                  <div class="card" style="width: 18rem; ">
+                    <img src="{% static 'images/nurse.jpg' %}" class="card-img-top" alt="..." style="height:12rem;">
+                    <div class="card-body">  
+                      <h5 class="card-title font-weight-bold " >Skilled Nursing Services</h5>
+                      <p class="card-text">We provide aid for overall management of patients for short term and long term. These services are provided by licensed nursing personal only.</p>
+                      <a href="#" class="btn btn-primary">More</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+                  <div class="card" style="width: 18rem; ">
+                    <img src="{% static 'images/physio.jpg' %}" class="card-img-top" alt="..." >
+                    <div class="card-body">  
+                      <h5 class="card-title font-weight-bold " >Physiotherapy</h5>
+                      <p class="card-text">Our skilled therapists provide regular and effective therapies with utmost patience. They work with the motive of easing the pain and ensuring life long stability of patients.</p>
+                      <a href="#" class="btn btn-primary">More</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                  <div class="card" style="width: 18rem; ">
+                    <img src="{% static 'images/counselling.jpg' %}" class="card-img-top" alt="..." style="height:12rem;">
+                    <div class="card-body">  
+                      <h5 class="card-title font-weight-bold " >Counseling</h5>
+                      <p class="card-text">Our home health team observes the patients, assess the needs, evaluate the conditions. Even the minutest of detail is reported for a errorless treatment</p>
+                      <a href="#" class="btn btn-primary">More</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                  <div class="card" style="width: 18rem; ">
+                    <img src="{% static 'images/ecg.jpg' %}" class="card-img-top" alt="..."  style="height:12rem;" >
+                    <div class="card-body">  
+                      <h5 class="card-title font-weight-bold " >ECG & Lab Test</h5>
+                      <p class="card-text">Our technologically advanced Labs assure 100% accuracy in reports. We ensure precision right from collecting the sample to delivering reports on time</p>
+                      <a href="#" class="btn btn-primary">More</a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                <div class="card" style="width: 18rem; ">
+                  <img src="{% static 'images/covid.jpg' %}" class="card-img-top" alt="..." >
+                  <div class="card-body">  
+                    <h5 class="card-title font-weight-bold " >Covid Test</h5>
+                    <p class="card-text">We offer a convenient, fast, and highly accurate covid test with high safety measures. For such individuals and situations, test services at home serve as the most appropriate solution.
+
+                        More</p>
+                    <a href="#" class="btn btn-primary">More</a>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <section id="departments" class="departments">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2>Departments</h2>
+                    <p>Hospitals typically consist of various departments, each specializing in different areas of healthcare to ensure comprehensive care for patients. These departments include but are not limited to emergency medicine, cardiology, oncology, neurology, orthopedics, obstetrics and gynecology, pediatrics, radiology, pathology, anesthesiology, and many more, all working together to provide a wide range of medical services and expertise.</p>                  </div>
+          
+                  <div class="row gy-4">
+                    <div class="col-lg-3">
+                      <ul class="nav nav-tabs flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1" >Cardiology</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-bs-toggle="tab" href= "#tab-2">Neurology</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-bs-toggle="tab" href= "#tab-3">Hepatology</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-bs-toggle="tab" href= "#tab-4">Pediatrics</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-bs-toggle="tab" href= "#tab-5">Eye Care</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-lg-9">
+                      <div class="tab-content">
+                        <div class="tab-pane active show" id="tab-1">
+                          <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                              <h3>Cardiology</h3>
+                              <p class="fst-italic">The Cardiac Rehabilitation program is a progressive exercise and education program designed to help patients recovering from recent cardiovascular-related operations or problems such as:</p>
+                              <li>Bypass surgery</li>
+                              <li>Angioplasty or intracoronary stent</li>
+                              <li>Valve replacement</li>
+                              <li>Heart attack</li>
+                              <li>Angina</li>
+                              <li>Congestive heart failure</li>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                              <img src="{% static 'images/cardiology.jpg' %}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="tab-2">
+                          <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                              <h3>Neurology</h3>
+                              <p class="fst-italic">Neurologists are licensed medical specialists who diagnose and treat disorders that affect the brain, spinal cord, nerves, and muscles of patients.</p>
+                              <p>They examine a patient's mental and physical status, conduct medical tests and scans, and evaluate the results to diagnose and treat the patient.</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                              <img src="{% static 'images/neuro.jpg' %}" alt="" class="img-fluid">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab-3">
+                          <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                              <h3>Hepatology</h3>
+                              <p class="fst-italic">
+                                The responsibilities of a hepatologist include consulting on liver problems, conducting follow-up care of liver transplant patients, and performing various surgical procedures.</p>
+                              <p>To be successful as a hepatologist, you should exhibit compassion for patients, provide exceptional patient care, and be a patient person..</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                              <img src="{% static 'images/hepat.jpg' %}" alt="" class="img-fluid"> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab-4">
+                          <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                              <h3>Pediatrics</h3>
+                              <p class="fst-italic">A pediatrician provides general medical care, monitors growth and development, and tracks and administers immunizations for infants, children, adolescents, and young adults. </p>
+                              <p>The pediatrician diagnoses and treats illnesses, medical conditions, and injuries, and eases the lives of children with chronic conditions.</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                              <img src="{% static 'images/pediatric.jpg' %}" alt="" class="img-fluid">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                          <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                              <h3>Eye Care</h3>
+                              <p class="fst-italic">"Your sight depends on seeing the right eye doctor at the right time". When it's time to get your eyes checked, make sure you are seeing the right eye care professional for your needs.</p>
+                              <p>They carry out eye examinations and vision tests and use the results to diagnose and treat eye infections, diseases and disorders. They are also qualified to perform eye surgeries and provide patients with post-surgery treatment.</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                              <img src="{% static 'images/eye.jpg' %}" alt="" class="img-fluid">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                </div>
+              </section>
+              <section id="doctors" class="doctors">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2>Doctors</h2>
+                    <p>Doctors save lives, but their importance goes far beyond that. Doctors also make a difference by helping patients minimize pain, recover from a disease faster or learn to live with a disabling injury . A patient's ability to enjoy life, even if they can't be cured, makes a huge difference to them and to their families. </p>
+                  </div>
+          
+                  <div class="row">
+          
+                    <div class="col-lg-6">
+                      <div class="member d-flex align-items-start">
+                        <div class="pic"><img src="{% static 'images/doctors-1.jpg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                          <h4>Walter White</h4>
+                          <span>Chief Medical Officer</span>
+                          <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                          <div class="social">
+                            <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-brands fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-brands fa-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-brands fa-linkedin"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                      <div class="member d-flex align-items-start">
+                        <div class="pic"><img src="{% static 'images/doctors-2.jpg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                          <h4>Sarah Jhonson</h4>
+                          <span>Anesthesiologist</span>
+                          <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                          <div class="social">
+                            <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-brands fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-brands fa-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-brands fa-linkedin"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-6 mt-4">
+                      <div class="member d-flex align-items-start">
+                        <div class="pic"><img src="{% static 'images/doctors-3.jpg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                          <h4>William Anderson</h4>
+                          <span>Cardiology</span>
+                          <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                          <div class="social">
+                            <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-brands fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-brands fa-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-brands fa-linkedin"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-6 mt-4">
+                      <div class="member d-flex align-items-start">
+                        <div class="pic"><img src="{% static 'images/doctors-4.jpg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                          <h4>Amanda Jepson</h4>
+                          <span>Neurosurgeon</span>
+                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                          <div class="social">
+                            <a href="#" class="twitter"><i class="fa fa-brands fa-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="fa fa-brands fa-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-brands fa-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-brands fa-linkedin"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+          
+                </div>
+              </section>
+
+              <section id="appoinment" class="appoinment">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2>Appoinment</h2>
+                  </div>
+                  <section class="h-100 bg-dark">
+                    <div class="container py-5 h-100">
+                      <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col">
+                          <div class="card card-registration my-4">
+                            <div class="row g-0">
+                              <div class="col-xl-6 d-none d-xl-block">
+                                <img src="{% static 'images/hos1.jpg' %}"
+                                  alt="Sample photo" class="img-fluid"
+                                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;height:550px;" />
+                              </div>
+                              <div class="col-xl-6">
+                                <div class="card-body p-md-5 text-black">
+                                  <h3 class="mb-5 text-uppercase">Make An Appoinment</h3>
+                                  <form action="{% url 'appoinment' %}" method="post">
+                                    {% csrf_token %}
+
+                  
+                                    <div class="row">
+                                      <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                          <input type="text" id="form3Example1m" name='name' class="form-control form-control-lg" />
+                                          <label class="form-label" for="form3Example1m">Name</label>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                          <input type="Email" id="form3Example1n" name='email' class="form-control form-control-lg" />
+                                          <label class="form-label" for="form3Example1n">EmailId</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                    
+                                    <div class="row">
+                                      <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                          <input type="number" id="form3Example1m1" name='number' class="form-control form-control-lg" />
+                                          <label class="form-label" for="form3Example1m1">Contact Number</label>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                          <input type="date" id="form3Example1n1" name='date' class="form-control form-control-lg" />
+                                          <label class="form-label" for="form3Example1n1">Select a date </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                    
+                                    
+                    
+                                    
+                    
+                                    <div class="row">
+                                      <div class="col-md-6 mb-4">
+                    
+                                        <select class="select">
+                                          <option value="">Select Department</option>
+                                          <option value="Department 1">Department 1</option>
+                                          <option value="Department 2">Department 2</option>
+                                          <option value="Department 3">Department 3</option>
+                                        </select>
+                    
+                                      </div>
+                                      <div class="col-md-6 mb-4">
+                    
+                                        <select name="doctor" id="doctor" class="form-select">
+                                          <option value="">Select Doctor</option>
+                                          <option value="Doctor 1">Doctor 1</option>
+                                          <option value="Doctor 2">Doctor 2</option>
+                                          <option value="Doctor 3">Doctor 3</option>
+                                        </select>
+                    
+                                      </div>
+                                    </div>
+                    
+                                    
+                                    <div class="d-flex justify-content-end pt-3">
+                                      
+                                      <input type="Submit" value="Make an Appoinment" class=" btn btn-dark btn-lg btn-block">
+                                    </div>
+                                  </form>
+                    
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                 
+          
+                </div>
+              </section><!-- End Appointment Section -->
+              <section id="review" class="review">
+                <div class="container">
+                  <div class="section-title">
+                    <h2>Reviews</h2>
+                  </div>
+                  <figure class="snip1390">
+                    <img src="{% static 'images/testimonials-1.jpg' %}" alt="profile-sample3" class="profile" />
+                    <figcaption>
+                      <h2>Eleanor Crisp</h2>
+                      <h4>UX Design</h4>
+                      <blockquote>Dad buried in landslide! Jubilant throngs fill streets! Stunned father inconsolable - demands recount!</blockquote>
+                    </figcaption>
+                  </figure>
+                  <figure class="snip1390 hover"><img src="{% static 'images/testimonials-2.jpg' %}" alt="profile-sample5" class="profile" />
+                    <figcaption>
+                      <h2>Gordon Norman</h2>
+                      <h4>Accountant</h4>
+                      <blockquote>Wormwood : Calvin, how about you? Calvin : Hard to say ma'am. I think my cerebellum has just fused. </blockquote>
+                    </figcaption>
+                  </figure>
+                  <figure class="snip1390"><img src="{% static 'images/testimonials-3.jpg' %}" alt="profile-sample6" class="profile" />
+                    <figcaption>
+                      <h2>Sue Shei</h2>
+                      <h4>Public Relations</h4>
+                      <blockquote>The strength to change what I can, the inability to accept what I can't and the incapacity to tell the difference.</blockquote>
+                    </figcaption>
+                  </figure>
+                  
+                </div>
+              </section>
+              <section id="brochure" class="brochure">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2>Highlights</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                  </div>
+                </div>
+          
+                <div class="container-fluid">
+                  <div class="row g-0">
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-1.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-1.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-2.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-2.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-3.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-3.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-4.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-4.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-5.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-5.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-6.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-6.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-7.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-7.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+          
+                    <div class="col-lg-3 col-md-4">
+                      <div class="gallery-item">
+                        <a href="{% static 'images/gallery-8.jpg' %}" class="galelry-lightbox">
+                          <img src="{% static 'images/gallery-8.jpg' %}" alt="" class="img-fluid">
+                        </a>
+                      </div>
+                    </div>
+
+          
+                  </div>
+                  <div class="d-grid gap-4 col-2 mx-auto">
+                    <a class="btn btn-primary" href="{% url 'loginpage' %}" role="button">More Details</a>
+                  </div>
+          
+                </div>
+              </section>
+              <section id="contact" class="contact">
+                <div class="container">
+          
+                  <div class="section-title">
+                    <h2>Contact Us</h2>
+                  </div>
+                <div data-aos="fade-up">
+                  <iframe style="border:0; width: 100%; height: 300px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251482.7098221955!2d76.16084684787937!3d9.98234276321337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5844192!2sKochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1675309378249!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+          
+                <div class="container" data-aos="fade-up">
+          
+                  <div class="row mt-5">
+          
+                    <div class="col-lg-4">
+                      <div class="info">
+                        <div class="address">
+                          <i class="bi bi-geo-alt"></i>
+                          <h4>Location:</h4>
+                          <p>InfoPark Kakkanad</p>
+                        </div>
+          
+                        <div class="email">
+                          <i class="bi bi-envelope"></i>
+                          <h4>Email:</h4>
+                          <p>info@example.com</p>
+                          <p>contact@yahoo.com</p>
+                        </div>
+          
+                        <div class="phone">
+                          <i class="bi bi-phone"></i>
+                          <h4>Call:</h4>
+                          <p>+1 5589 55488 55s</p>
+                          <p>8080707060</p>
+                        </div>
+          
+                      </div>
+          
+                    </div>
+          
+                    <div class="col-lg-8 mt-5 mt-lg-0">
+          
+                      <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                          <div class="col-md-6 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                          </div>
+                          <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                          </div>
+                        </div>
+                        <div class="form-group mt-3">
+                          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group mt-3">
+                          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        
+                        <div class="text-center"><button class="btn btn-primary" type="submit">Send Message</button></div>
+                      </form>
+          
+                    </div>
+          
+                  </div>
+          
+                </div>
+              </section>
+              <footer id="footer">
+
+                <div class="footer-top">
+                  <div class="container">
+                    <div class="row">
+            
+                      <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>MediCity</h3>
+                        <p>
+                          A108 Adam Street <br>
+                          New York, NY 535022<br>
+                          United States <br><br>
+                          <strong>Phone:</strong> +1 5589 55488 55<br>
+                          <strong>Email:</strong> info@example.com<br>
+                        </p>
+                      </div>
+            
+                      <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                          <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                      </div>
+            
+                      <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Get In Touch</h4>
+                        <p>MediCity,Kochi Kerala - 683503</p>
+                        9080706070
+                        9080707070
+                        medicity@gmail.com</p>
+                        
+                      </div>
+            
+                      <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Join Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <form action="" method="post">
+                          <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                      </div>
+            
+                    </div>
+                  </div>
+                </div>
+            
+                
+             
+              </footer>
+              {% comment %} <div id="preloader"></div>
+                <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> {% endcomment %}
+
+
+    </body>
+</html>
