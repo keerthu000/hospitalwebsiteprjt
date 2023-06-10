@@ -29,6 +29,12 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <style>
+    *{
+      margin:0;
+      padding:3px;
+    }
+  </style>
   
 </head>
 
@@ -96,7 +102,7 @@
       
               <div class="row">
                 <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-                  <img src="{% static 'images/hea.jpg' %}">
+                 
                 </div>
               
                 <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
@@ -114,7 +120,6 @@
       
             </div>
           </section>
-         
 
           <section id="services" class="services">
             <div class="container">
@@ -395,7 +400,7 @@
                           <div class="col-xl-6">
                             <div class="card-body p-md-5 text-black">
                               <h3 class="mb-5 text-uppercase">Make An Appoinment</h3>
-                              <form action="{% url 'appoinment' %}" method="post">
+                              <form action="#" method="post">
                                 {% csrf_token %}
 
               
@@ -472,7 +477,7 @@
                 </div>
            
              
-                
+      
             </div>
           </section><!-- End Appointment Section -->
           <section id="review" class="review">
@@ -480,36 +485,28 @@
               <div class="section-title">
                 <h2>Reviews</h2>
               </div>
-              <div class="swiper-slide">
-              	<div class="testimonial-wrap">
-                		<div class="testimonial-item">
-                      <figure class="snip1390 hover"><img src="{% static 'images/testimonials-1.jpg' %}" alt="profile-sample3" class="profile" />
-                    <figcaption>
-                      <h2>Eleanor Crisp</h2>
-                      <h4>UX Design</h4>
-                      <blockquote>Dad buried in landslide! Jubilant throngs fill streets! Stunned father inconsolable - demands recount!</blockquote>
-                    </figcaption>
-                  </figure>
-                  <figure class="snip1390 hover"><img src="{% static 'images/testimonials-2.jpg' %}" alt="profile-sample5" class="profile" />
-                    <figcaption>
-                      <h2>Gordon Norman</h2>
-                      <h4>Accountant</h4>
-                      <blockquote>Wormwood : Calvin, how about you? Calvin : Hard to say ma'am. I think my cerebellum has just fused. </blockquote>
-                    </figcaption>
-                  </figure>
-                  <figure class="snip1390"><img src="{% static 'images/testimonials-3.jpg' %}" alt="profile-sample6" class="profile" />
-                    <figcaption>
-                      <h2>Sue Shei</h2>
-                      <h4>Public Relations</h4>
-                      <blockquote>The strength to change what I can, the inability to accept what I can't and the incapacity to tell the difference.</blockquote>
-                    </figcaption>
-                  </figure>
-                  
-                  
-                </div>
-              </section>
-      
-                  
+              <figure class="snip1390">
+                <img src="{% static 'images/testimonials-1.jpg' %}" alt="profile-sample3" class="profile" />
+                <figcaption>
+                  <h2>Eleanor Crisp</h2>
+                  <h4>UX Design</h4>
+                  <blockquote>Dad buried in landslide! Jubilant throngs fill streets! Stunned father inconsolable - demands recount!</blockquote>
+                </figcaption>
+              </figure>
+              <figure class="snip1390 hover"><img src="{% static 'images/testimonials-2.jpg' %}" alt="profile-sample5" class="profile" />
+                <figcaption>
+                  <h2>Gordon Norman</h2>
+                  <h4>Accountant</h4>
+                  <blockquote>Wormwood : Calvin, how about you? Calvin : Hard to say ma'am. I think my cerebellum has just fused. </blockquote>
+                </figcaption>
+              </figure>
+              <figure class="snip1390"><img src="{% static 'images/testimonials-3.jpg' %}" alt="profile-sample6" class="profile" />
+                <figcaption>
+                  <h2>Sue Shei</h2>
+                  <h4>Public Relations</h4>
+                  <blockquote>The strength to change what I can, the inability to accept what I can't and the incapacity to tell the difference.</blockquote>
+                </figcaption>
+              </figure>
               
             </div>
           </section>
@@ -592,8 +589,7 @@
       
               </div>
               <div class="d-grid gap-4 col-2 mx-auto">
-              
-                <a class="btn btn-primary" href="{% url 'loginpage' %}" role="button">More Details</a>
+                <a class="btn btn-primary" href="#" role="button">More Details</a>
               </div>
       
             </div>
@@ -624,15 +620,15 @@
                     <div class="email">
                       <i class="bi bi-envelope"></i>
                       <h4>Email:</h4>
-                      <p>info@example.com</p>
-                      <p>contact@yahoo.com</p>
+                      <p>Info@Altostechnologies.In</p>
+                      
                     </div>
       
                     <div class="phone">
                       <i class="bi bi-phone"></i>
                       <h4>Call:</h4>
-                      <p>+1 5589 55488 55s</p>
-                      <p>8080707060</p>
+                      <p>+91 974 663 2202</p>
+                     
                     </div>
       
                   </div>
@@ -674,13 +670,14 @@
                 <div class="row">
         
                   <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>MediCity</h3>
+                    <h3>ALTOS Technologies</h3>
                     <p>
-                      A108 Adam Street <br>
-                      New York, NY 535022<br>
-                      United States <br><br>
-                      <strong>Phone:</strong> +1 5589 55488 55<br>
-                      <strong>Email:</strong> info@example.com<br>
+                      1st floor, Thapasaya Building,<br>
+                       Infopark, Kakanad, Kochi, <br>
+                       Kerala 682042 <br>
+                     
+                      <strong>Phone:</strong> +91 974 663 2202<br>
+                      <strong>Email:</strong> Info@Altostechnologies.In<br>
                     </p>
                   </div>
         
@@ -697,10 +694,14 @@
         
                   <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Get In Touch</h4>
-                    <p>MediCity,Kochi Kerala - 683503</p>
-                    9080706070
-                    9080707070
-                    medicity@gmail.com</p>
+                    <p>
+                      1st floor, Thapasaya Building,<br>
+                       Infopark, Kakanad, Kochi, <br>
+                       Kerala 682042 <br>
+                     
+                      <strong>Phone:</strong> +91 974 663 2202<br>
+                      <strong>Email:</strong> Info@Altostechnologies.In<br>
+                    </p>
                     
                   </div>
         
